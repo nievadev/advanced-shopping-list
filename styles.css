@@ -1,0 +1,69 @@
+/* Default */
+html {
+    font-family: "Raleway", sans-serif;
+    font-size: 16px;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+/* Finish of Default */
+
+/* Layout */
+body {
+    margin: 0;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 80px 400px 60px auto 200px;
+    grid-template-areas:
+        ". th ."
+        "h h h"
+        "bh bh bh"
+        ". c ."
+        "f f f";
+}
+
+.top-header {
+    background-color: rosybrown;
+    grid-area: th;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header {
+    background-color: lightcoral;
+    grid-area: h;
+}
+
+.below-header {
+    background-color: aquamarine;
+    grid-area: bh;
+}
+
+main {
+    background-color: palegreen;
+    grid-area: c;
+}
+
+footer {
+    background-color: crimson;
+    grid-area: f;
+}
+/* Finish of Layout */
+
+.logo {
+    height: 100%;
+    width: 300px;
+    background-color: darkorange;
+}
+
+.shopping-cart {
+    height: 80%;
+    margin-right: 8px;
+}
