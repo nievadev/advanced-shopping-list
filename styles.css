@@ -11,7 +11,10 @@ ul {
 a {
     text-decoration: none;
 }
-/* Finish of Default */
+
+span {
+    display: inline-block;
+}
 
 /* Layout */
 body {
@@ -29,7 +32,6 @@ body {
 }
 
 .top-header {
-    background-color: rosybrown;
     grid-area: th;
     display: flex;
     justify-content: space-between;
@@ -55,15 +57,79 @@ footer {
     background-color: crimson;
     grid-area: f;
 }
-/* Finish of Layout */
 
+/* Styling Top Header */
 .logo {
-    height: 100%;
-    width: 300px;
-    background-color: darkorange;
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    height: 70px;
+}
+
+.logo-text {
+    font-size: 3em;
+    font-weight: 100;
+    color: #666;
 }
 
 .shopping-cart {
     height: 80%;
     margin-right: 8px;
+    cursor: pointer;
+}
+
+/* Header Layout */
+header {
+    background: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url(./img/dev-photo.jpg) center top no-repeat;
+    background-size: cover;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 4fr 1fr 1fr 1fr 4fr;
+    grid-template-areas:
+        ". . ."
+        ". t1 ."
+        ". t2 ."
+        ". fo ."
+        ". . .";
+}
+
+.text-1 {
+    grid-area: t1;
+}
+
+.text-2 {
+    grid-area: t2;
+}
+
+.form {
+    grid-area: fo;
+}
+
+/* Styling Header */
+.search-btn {
+    box-sizing: border-box;
+    border: none;
+    background: none;
+}
+
+.search-input {
+    resize: none;
+    border: none;
+    font-size: 1.4em;
+    padding: 0;
+    margin: 0;
+}
+
+.search-btn-icon {
+    height: 30px;
+    width: auto;
+}
+
+.form {
+    background: white;
+    width: max-content;
+    border-radius: 5px;
+    display: flex;
 }
