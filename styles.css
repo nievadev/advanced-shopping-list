@@ -21,8 +21,8 @@ body {
     margin: 0;
     height: 100vh;
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    grid-template-rows: 80px 400px 60px auto 200px;
+    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-rows: 80px 400px 80px auto 200px;
     grid-template-areas:
         ". th ."
         "h h h"
@@ -39,12 +39,10 @@ body {
 }
 
 header {
-    background-color: lightcoral;
     grid-area: h;
 }
 
 .below-header {
-    background-color: aquamarine;
     grid-area: bh;
 }
 
@@ -65,7 +63,8 @@ footer {
 }
 
 .logo-img {
-    height: 70px;
+    height: 50px;
+    width: auto;
 }
 
 .logo-text {
@@ -75,7 +74,7 @@ footer {
 }
 
 .shopping-cart {
-    height: 80%;
+    height: 50px;
     margin-right: 8px;
     cursor: pointer;
 }
@@ -85,8 +84,8 @@ header {
     background: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url(./img/dev-photo.jpg) center top no-repeat;
     background-size: cover;
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    grid-template-rows: 4fr 1fr 1fr 1fr 4fr;
+    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-rows: 120px 1fr 1fr 1fr 125px;
     grid-template-areas:
         ". . ."
         ". t1 ."
@@ -115,11 +114,10 @@ header {
 }
 
 .search-input {
-    resize: none;
     border: none;
-    font-size: 1.4em;
-    padding: 0;
-    margin: 0;
+    font-size: 1.1em;
+    margin-left: 8px;
+    padding: 13px 0px;
 }
 
 .search-btn-icon {
@@ -127,9 +125,36 @@ header {
     width: auto;
 }
 
+.search-btn-icon:hover {
+    cursor: pointer;
+}
+
 .form {
     background: white;
     width: max-content;
     border-radius: 5px;
     display: flex;
+}
+
+.text-1 {
+    color: white;
+    font-size: 3em;
+    font-weight: 100;
+}
+
+.text-2 {
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 60px;
+}
+
+/* Below header Grid */
+.below-header {
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-rows: 1fr;
+}
+
+.box-1, .box-2, .box-3 {
+    grid-column: 2;
 }
