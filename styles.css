@@ -21,16 +21,17 @@ body {
     margin: 0;
     height: 100vh;
     display: grid;
-    grid-template-columns: [th-start h-start bh-start c-start f-start] 1fr [th-end h-end bh-end c-end f-end];
+    grid-template-columns: 
+        [th-start h-start bh-start c-start f-start] 1fr [th-end h-end bh-end c-end f-end];
     grid-template-rows:
         [th-start]
             80px
         [th-end h-start]
             400px
         [h-end bh-start]
-            120px
-        [bh-end c-start]
             auto
+        [bh-end c-start]
+            1fr
         [c-end f-start]
             200px
         [f-end];
@@ -158,10 +159,12 @@ header {
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;
     grid-template-rows: 1fr;
+    grid-template-areas:
+        ". bc .";
 }
 
 .box-container {
-    grid-column: 2;
+    grid-area: bc;
     display: flex;
 }
 
@@ -171,16 +174,17 @@ header {
     grid-template-columns: [icon-start] 1fr [icon-end] 2fr;
     grid-template-rows: [icon-start] 1fr 1fr [icon-end];
     grid-gap: 10px;
+    margin: 20px 0px;
 }
 
-/* Styling Below Header */
 .box .icon {
     grid-area: icon;
     align-self: center;
-    justify-self: center;
+    justify-self: end;
 }
 
-.icon img {
+/* Styling Below Header */
+.icon .box-1-icon {
     height: 40px;
     width: auto;
 }
@@ -199,11 +203,45 @@ header {
 
 /* Media queries */
 @media only screen and (max-width: 1350px) {
-    .below-header {
+    .top-header {
         grid-template-columns: 40px 1fr 40px !important;
     }
 
     header {
         grid-template-columns: 40px 1fr 40px !important;
+    }
+
+    .below-header {
+        grid-template-columns: 40px 1fr 40px !important;
+    }
+}
+
+@media only screen and (max-width: 950px) {
+    .box-container {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+
+    .box:last-child {
+        grid-column: span 2;
+        justify-self: center;
+    }
+
+    .box:last-child .box-1-icon {
+        margin-right: 20px;
+    }
+
+    .text-1 {
+        text-align: center;
+        font-size: 2.5em;
+    }
+
+    .text-2 {
+        text-align: center;
+    }
+
+    .form {
+        justify-self: center;
     }
 }
