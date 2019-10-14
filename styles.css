@@ -21,21 +21,23 @@ body {
     margin: 0;
     height: 100vh;
     display: grid;
-    grid-template-columns: 1fr 4fr 1fr;
-    grid-template-rows: 80px 400px 120px auto 200px;
-    grid-template-areas:
-        ". th ."
-        "h h h"
-        "bh bh bh"
-        ". c ."
-        "f f f";
+    grid-template-columns: [th-start h-start bh-start c-start f-start] 1fr [th-end h-end bh-end c-end f-end];
+    grid-template-rows:
+        [th-start]
+            80px
+        [th-end h-start]
+            400px
+        [h-end bh-start]
+            120px
+        [bh-end c-start]
+            auto
+        [c-end f-start]
+            200px
+        [f-end];
 }
 
 .top-header {
     grid-area: th;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
 header {
@@ -56,21 +58,24 @@ footer {
     grid-area: f;
 }
 
-/* Styling Top Header */
-.logo {
+/* Top Header Layout */
+.top-header {
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-rows: 1fr;
+}
+
+.top-header-container {
+    grid-column: 2;
     display: flex;
+    justify-content: space-between;
     align-items: center;
 }
 
+/* Styling Top Header */
 .logo-img {
     height: 50px;
     width: auto;
-}
-
-.logo-text {
-    font-size: 3em;
-    font-weight: 100;
-    color: #666;
 }
 
 .shopping-cart {
@@ -190,4 +195,15 @@ header {
 
 .box p:first-of-type {
     align-self: end;
+}
+
+/* Media queries */
+@media only screen and (max-width: 1350px) {
+    .below-header {
+        grid-template-columns: 40px 1fr 40px !important;
+    }
+
+    header {
+        grid-template-columns: 40px 1fr 40px !important;
+    }
 }
