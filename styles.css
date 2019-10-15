@@ -91,7 +91,7 @@ header {
     background-size: cover;
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;
-    grid-template-rows: 120px 1fr 1fr 1fr 125px;
+    grid-template-rows: 2fr 1fr 1fr 1fr 2fr;
     grid-template-areas:
         ". . ."
         ". t1 ."
@@ -154,51 +154,42 @@ header {
     margin-bottom: 60px;
 }
 
-/* Below header Grid */
+/* Below Header Grid */
 .below-header {
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;
     grid-template-rows: 1fr;
-    grid-template-areas:
-        ". bc .";
+    grid-template-areas: 
+        ". bh .";
 }
 
 .box-container {
-    grid-area: bc;
+    grid-area: bh;
     display: flex;
+    flex-wrap: wrap;
 }
 
 .box {
-    flex: 1;
-    display: grid;
-    grid-template-columns: [icon-start] 1fr [icon-end] 2fr;
-    grid-template-rows: [icon-start] 1fr 1fr [icon-end];
-    grid-gap: 10px;
-    margin: 20px 0px;
-}
-
-.box .icon {
-    grid-area: icon;
-    align-self: center;
-    justify-self: end;
+    flex-grow: 1;
+    flex-basis: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 /* Styling Below Header */
-.icon .box-1-icon {
-    height: 40px;
-    width: auto;
+.box-1-icon {
+    height: 50px;
 }
 
-.box p {
-    white-space: nowrap;
-    color: #333;
-    margin: 0;
-    justify-self: center;
-    font-size: 1.1em;
+.icon {
+    margin-right: 20px;
 }
 
-.box p:first-of-type {
-    align-self: end;
+.box-content p {
+    text-align: center;
 }
 
 /* Media queries */
@@ -212,36 +203,6 @@ header {
     }
 
     .below-header {
-        grid-template-columns: 40px 1fr 40px !important;
-    }
-}
-
-@media only screen and (max-width: 950px) {
-    .box-container {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
-    }
-
-    .box:last-child {
-        grid-column: span 2;
-        justify-self: center;
-    }
-
-    .box:last-child .box-1-icon {
-        margin-right: 20px;
-    }
-
-    .text-1 {
-        text-align: center;
-        font-size: 2.5em;
-    }
-
-    .text-2 {
-        text-align: center;
-    }
-
-    .form {
-        justify-self: center;
+        grid-template-columns: 0fr 1fr 0fr !important;
     }
 }
