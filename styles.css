@@ -25,7 +25,7 @@ body {
         [th-start h-start bh-start c-start f-start] 1fr [th-end h-end bh-end c-end f-end];
     grid-template-rows:
         [th-start]
-            80px
+            auto
         [th-end h-start]
             400px
         [h-end bh-start]
@@ -74,6 +74,10 @@ footer {
 }
 
 /* Styling Top Header */
+.top-header-container {
+    padding: 10px 0px;
+}
+
 .logo-img {
     height: 50px;
     width: auto;
@@ -108,7 +112,7 @@ header {
     grid-area: t2;
 }
 
-.form {
+.form-container {
     grid-area: fo;
 }
 
@@ -154,13 +158,14 @@ header {
     margin-bottom: 60px;
 }
 
-/* Below Header Grid */
+/* Below Header Layout */
 .below-header {
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;
     grid-template-rows: 1fr;
     grid-template-areas: 
         ". bh .";
+    padding: 10px 0px;
 }
 
 .box-container {
@@ -203,6 +208,29 @@ header {
     }
 
     .below-header {
+        grid-template-columns: 0fr 1fr 0fr !important;
+    }
+}
+
+@media only screen and (max-width: 720px) {
+    .logo-img, .shopping-cart {
+        height: 40px !important;
+    }
+
+    .text-1 {
+        font-size: 2.5em;
+        text-align: center;
+    }
+
+    .text-2 {
+        text-align: center;
+    }
+
+    .form-container {
+        justify-self: center;
+    }
+
+    header {
         grid-template-columns: 0fr 1fr 0fr !important;
     }
 }
