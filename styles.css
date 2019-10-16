@@ -221,10 +221,11 @@ h1 {
 /* Card Container Layout */
 .card-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(315px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(350px, 0.8fr));
     grid-auto-rows: 530px;
     grid-gap: 40px;
     margin: 30px 0px;
+    justify-content: center;
 }
 
 .card {
@@ -277,7 +278,8 @@ h1 {
         grid-template-columns: 0fr 1fr 0fr !important;
     }
 
-    main {
-        grid-template-columns: 0fr 1fr 0fr !important;
+    h1 {
+        font-size: 3em;
+        margin: 20px 0px !important;
     }
 }
