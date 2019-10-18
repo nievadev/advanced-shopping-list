@@ -242,6 +242,7 @@ h1 {
     filter: blur(3px);
     transition: filter 0.2s;
     height: 100%;
+    transform: scale(1.1);
 }
 
 .card:hover .card-img {

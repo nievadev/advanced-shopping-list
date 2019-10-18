@@ -2,56 +2,53 @@ document.querySelector("#form").addEventListener("submit", function(event) {
     event.preventDefault();
 })
 
-let coursesList = getCourses();
+let defaultCoursesList = [
+    {
+        author: "Martin Nieva",
+        title: "Javascript, HTML, CSS",
+        imgUrl: "./img/nieva.jpeg",
+        rating: 5
+    },
 
-if (coursesList === null)
-{
-    coursesList = [
-        {
-            author: "Martin Nieva",
-            title: "Javascript, HTML, CSS",
-            imgUrl: "./img/terry.png",
-            rating: 5
-        },
+    {
+        author: "Ignacio Dodero",
+        title: "Learn the guitar",
+        imgUrl: "./img/dodero.jpeg",
+        rating: 4
+    },
 
-        {
-            author: "Ignacio Dodero",
-            title: "Learn the guitar",
-            imgUrl: "./img/terry.png",
-            rating: 4
-        },
+    {
+        author: "Mr. God",
+        title: "Using magic from scratch",
+        imgUrl: "./img/god.jpeg",
+        rating: 5
+    },
 
-        {
-            author: "Mr. God",
-            title: "Using magic from scratch",
-            imgUrl: "./img/terry.png",
-            rating: 5
-        },
+    {
+        author: "Unknown Redhead Girl",
+        title: "How to be beautiful",
+        imgUrl: "./img/redhead.jpeg",
+        rating: 5
+    },
 
-        {
-            author: "Unknown Redhead Girl",
-            title: "How to be beautiful",
-            imgUrl: "./img/terry.png",
-            rating: 5
-        },
+    {
+        author: "Daniel Kahneman",
+        title: "Psychology Basics",
+        imgUrl: "./img/kahneman.jpeg",
+        rating: 4
+    },
 
-        {
-            author: "Daniel Kahneman",
-            title: "Psychology Basics",
-            imgUrl: "./img/terry.png",
-            rating: 4
-        },
+    {
+        author: "Terry A. Davis and Mr. God",
+        title: "Make an OS from scratch",
+        imgUrl: "./img/terry.png",
+        rating: 5, 
+    }
+];
 
-        {
-            author: "Terry A. Davis and Mr. God",
-            title: "Make an OS from scratch",
-            imgUrl: "./img/terry.png",
-            rating: 5, 
-        }
-    ];
+let coursesList = [...defaultCoursesList];
 
-    localStorage.setItem("courses", JSON.stringify(coursesList));
-}
+localStorage.setItem("courses", JSON.stringify(coursesList));
 
 for (let i = 0; i < coursesList.length; i++)
 {
