@@ -221,13 +221,14 @@ h1 {
 /* Card Container Layout */
 .card-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 0.8fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 0.8fr));
     grid-auto-rows: 530px;
     grid-gap: 40px;
     margin: 30px 0px;
     justify-content: center;
 }
 
+/* Styling Card Container */
 .card {
     border: 1px solid #000;
     transition: transform 0.2s;
@@ -235,6 +236,22 @@ h1 {
 
 .card:hover {
     transform: scale(1.05);
+}
+
+.card-img {
+    filter: blur(3px);
+    transition: filter 0.2s;
+    height: 100%;
+}
+
+.card:hover .card-img {
+    filter: blur(0px);
+}
+
+.of {
+    overflow: hidden;
+    height: 50%;
+    width: auto;
 }
 
 /* Media queries */
