@@ -232,6 +232,8 @@ h1 {
 .card {
     border: 1px solid #000;
     transition: transform 0.2s;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .card:hover {
@@ -258,19 +260,51 @@ h1 {
 .card-content > div {
     flex-grow: 1;
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .card-content .card-title {
-    background-color: #e99480;
+    background-color: #fad390;
+    border-top: 1px solid #000;
 }
 
 .card-content .card-title span {
-    color: white;
+    color: #666;
     font-size: 1.3em;
+    text-align: center;
 }
 
-.card-content > div > span {
-    margin: auto;
+.card-content .card-rating-price {
+    justify-content: space-between;
+}
+
+.card-content .card-rating-price span:last-child {
+    font-size: 1.7em;
+    font-weight: 700;
+    color: #333;
+    margin-right: 6%;
+}
+
+.card-content .card-rating-price span:first-child {
+    font-size: 1.3em;
+    font-weight: 400;
+    margin-left: 6%;
+}
+
+.card-content .card-btn {
+    padding-bottom: 15px;
+}
+
+.card-content .card-btn .course-btn {
+    height: 45px;
+    width: 90%;
+    background: linear-gradient(#45aaf2, #2d98da);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 1.1em;
+    cursor: pointer;
 }
 
 /* Media queries */

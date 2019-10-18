@@ -12,14 +12,14 @@ let defaultCoursesList = [
 
     {
         author: "Ignacio Dodero",
-        title: "Learn the guitar",
+        title: "Learn the guitar with Dodero's masterclass",
         imgUrl: "./img/dodero.jpeg",
         rating: 4
     },
 
     {
         author: "Mr. God",
-        title: "Using magic from scratch",
+        title: "Using magic to help people from scratch",
         imgUrl: "./img/god.jpeg",
         rating: 5
     },
@@ -64,13 +64,14 @@ for (let i = 0; i < coursesList.length; i++)
                 <span>${coursesList[i].title}</span>
             </div>
             <div class="card-author">
-                <span>${coursesList[i].author}</span>
+                <span>By <strong>${coursesList[i].author}</strong></span>
             </div>
-            <div class="card-rating">
-                <span>${coursesList[i].rating}</span>
-            </div>
-            <div class="card-price">
+            <div class="card-rating-price">
+                <span>Rating: ${coursesList[i].rating} stars</span>
                 <span>$5</span>
+            </div>
+            <div class="card-btn">
+                <button id="courseBtn" class="course-btn">Learn</button>
             </div>
         </div>
     `;
