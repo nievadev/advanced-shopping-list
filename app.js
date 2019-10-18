@@ -68,7 +68,7 @@ for (let i = 0; i < coursesList.length; i++)
             </div>
             <div class="card-rating-price">
                 <span>Rating: ${coursesList[i].rating} stars</span>
-                <span>$5</span>
+                <span><strong>$5</strong></span>
             </div>
             <div class="card-btn">
                 <button id="courseBtn" class="course-btn">Learn</button>

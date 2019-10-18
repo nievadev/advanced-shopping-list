@@ -252,60 +252,57 @@ h1 {
 }
 
 .card-content {
-    display: flex;
     height: 50%;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+}
+
+.card-title {
+    border-top: 1px solid #000;
+    background-color: #fad390;
+}
+
+.card-rating-price > span {
+    font-size: 1.3em;
+}
+
+.card-rating-price > span:first-child {
+    color: #d2aa0c;
+    font-weight: 400;
+}
+
+.card-rating-price > span:last-child {
+    color: #27ae60;
+}
+
+.card-title > span {
+    font-size: 1.3em;
+    text-align: center;
+    color: #333;
 }
 
 .card-content > div {
-    flex-grow: 1;
     display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
-.card-content .card-title {
-    background-color: #fad390;
-    border-top: 1px solid #000;
+.card-content > div > span {
+    margin: auto;
 }
 
-.card-content .card-title span {
-    color: #666;
-    font-size: 1.3em;
-    text-align: center;
-}
-
-.card-content .card-rating-price {
-    justify-content: space-between;
-}
-
-.card-content .card-rating-price span:last-child {
-    font-size: 1.7em;
-    font-weight: 700;
-    color: #333;
-    margin-right: 6%;
-}
-
-.card-content .card-rating-price span:first-child {
-    font-size: 1.3em;
-    font-weight: 400;
-    margin-left: 6%;
-}
-
-.card-content .card-btn {
-    padding-bottom: 15px;
-}
-
-.card-content .card-btn .course-btn {
-    height: 45px;
-    width: 90%;
-    background: linear-gradient(#45aaf2, #2d98da);
+.card-btn .course-btn {
     border: none;
+    background: linear-gradient(#45aaf2, #2d98da);
+    height: 70%;
+    width: 90%;
+    margin: 0 auto;
     border-radius: 5px;
     color: white;
-    font-size: 1.1em;
+    font-size: 1.3em;
     cursor: pointer;
 }
+
+/* background-color: #fad390; */
 
 /* Media queries */
 @media only screen and (max-width: 1350px) {
