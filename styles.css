@@ -239,20 +239,38 @@ h1 {
 }
 
 .card-img {
-    filter: blur(3px);
-    transition: filter 0.2s;
     height: 100%;
     transform: scale(1.1);
-}
-
-.card:hover .card-img {
-    filter: blur(0px);
 }
 
 .of {
     overflow: hidden;
     height: 50%;
     width: auto;
+}
+
+.card-content {
+    display: flex;
+    height: 50%;
+    flex-direction: column;
+}
+
+.card-content > div {
+    flex-grow: 1;
+    display: flex;
+}
+
+.card-content .card-title {
+    background-color: #e99480;
+}
+
+.card-content .card-title span {
+    color: white;
+    font-size: 1.3em;
+}
+
+.card-content > div > span {
+    margin: auto;
 }
 
 /* Media queries */

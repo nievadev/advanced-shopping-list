@@ -5,7 +5,7 @@ document.querySelector("#form").addEventListener("submit", function(event) {
 let defaultCoursesList = [
     {
         author: "Martin Nieva",
-        title: "Javascript, HTML, CSS",
+        title: "Master JavaScript, HTML and CSS!",
         imgUrl: "./img/nieva.jpeg",
         rating: 5
     },
@@ -60,9 +60,18 @@ for (let i = 0; i < coursesList.length; i++)
             </div>
         </div>
         <div class="card-content">
-            <span class="card-title">${coursesList[i].title}</span>
-            <span class="card-author">${coursesList[i].author}</span>
-            <span class="card-rating">${coursesList[i].rating}</span>
+            <div class="card-title">
+                <span>${coursesList[i].title}</span>
+            </div>
+            <div class="card-author">
+                <span>${coursesList[i].author}</span>
+            </div>
+            <div class="card-rating">
+                <span>${coursesList[i].rating}</span>
+            </div>
+            <div class="card-price">
+                <span>$5</span>
+            </div>
         </div>
     `;
 
