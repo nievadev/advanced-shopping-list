@@ -12,7 +12,7 @@ let defaultCoursesList = [
 
     {
         author: "Ignacio Dodero",
-        title: "Learn the guitar with Dodero's masterclass",
+        title: "Learn to play the guitar with Dodero's masterclass",
         imgUrl: "./img/dodero.jpeg",
         rating: 4
     },
@@ -80,6 +80,48 @@ for (let i = 0; i < coursesList.length; i++)
 
     document.querySelector("#cardImg-" + i).style.background = "#cfcfcf url(" + coursesList[i].imgUrl + ") center center no-repeat";
     document.querySelector("#cardImg-" + i).style.backgroundSize = "cover";
+}
+
+addCourse({
+    title: "How to be inauthentic",
+    author: "Typical Person",
+    imgUrl: "./img/typical.jpeg",
+    rating: 1
+})
+
+function addCourse(obj)
+{
+    coursesList.push(obj);
+    localStorage.setItem("courses", JSON.stringify(coursesList));
+
+    let card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+        <div class="of">
+            <div id="cardImg-${coursesList.length - 1}" class="card-img">
+            </div>
+        </div>
+        <div class="card-content">
+            <div class="card-title">
+                <span>${obj.title}</span>
+            </div>
+            <div class="card-author">
+                <span>By <strong>${obj.author}</strong></span>
+            </div>
+            <div class="card-rating-price">
+                <span>Rating: ${obj.rating} stars</span>
+                <span><strong>$5</strong></span>
+            </div>
+            <div class="card-btn">
+                <button id="courseBtn" class="course-btn">Learn</button>
+            </div>
+        </div>
+    `;
+
+    document.querySelector("#cardContainer").append(card);
+
+    document.querySelector("#cardImg-" + (coursesList.length - 1)).style.background = "#cfcfcf url(" + obj.imgUrl + ") center center no-repeat";
+    document.querySelector("#cardImg-" + (coursesList.length - 1)).style.backgroundSize = "cover";
 }
 
 function getCourses()
