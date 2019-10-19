@@ -1,8 +1,11 @@
+let coursesList = [];
+const btnInfo = "Enroll now!";
+
 document.querySelector("#form").addEventListener("submit", function(event) {
     event.preventDefault();
 })
 
-let defaultCoursesList = [
+const defaultCoursesList = [
     {
         author: "Martin Nieva",
         title: "Master JavaScript, HTML and CSS!",
@@ -46,9 +49,17 @@ let defaultCoursesList = [
     }
 ];
 
-let coursesList = [...defaultCoursesList];
+if (!getCourses())
+{
+    coursesList = [...defaultCoursesList];
 
-localStorage.setItem("courses", JSON.stringify(coursesList));
+    setCourses(coursesList);
+}
+
+else
+{
+    coursesList = getCourses();
+}
 
 for (let i = 0; i < coursesList.length; i++)
 {
@@ -71,7 +82,7 @@ for (let i = 0; i < coursesList.length; i++)
                 <span><strong>$5</strong></span>
             </div>
             <div class="card-btn">
-                <button id="courseBtn" class="course-btn">Learn</button>
+                <button class="course-btn">${btnInfo}</button>
             </div>
         </div>
     `;
@@ -82,17 +93,15 @@ for (let i = 0; i < coursesList.length; i++)
     document.querySelector("#cardImg-" + i).style.backgroundSize = "cover";
 }
 
-addCourse({
-    title: "How to be inauthentic",
-    author: "Typical Person",
-    imgUrl: "./img/typical.jpeg",
-    rating: 1
-})
+addButtonListeners("course-btn", "click", function(event) {
+    let pattern, result;
+    const innerHTML = event.target.parentElement.parentElement.innerHTML;
+});
 
 function addCourse(obj)
 {
     coursesList.push(obj);
-    localStorage.setItem("courses", JSON.stringify(coursesList));
+    setCourses(coursesList);
 
     let card = document.createElement("div");
     card.className = "card";
@@ -113,7 +122,7 @@ function addCourse(obj)
                 <span><strong>$5</strong></span>
             </div>
             <div class="card-btn">
-                <button id="courseBtn" class="course-btn">Learn</button>
+                <button class="course-btn">${btnInfo}</button>
             </div>
         </div>
     `;
@@ -127,4 +136,24 @@ function addCourse(obj)
 function getCourses()
 {
     return JSON.parse(localStorage.getItem("courses"));
+}
+
+function compare(oldArr, newArr)
+{
+    return JSON.stringify(oldArr) == JSON.stringify(newArr) ? true : false;
+}
+
+function setCourses(arr)
+{
+    localStorage.setItem("courses", JSON.stringify(arr));
+}
+
+function addButtonListeners(_class, wEvent, func)
+{
+    const allBtn = document.querySelectorAll("." + _class);
+
+    for (let i = 0; i < allBtn.length; i++)
+    {
+        allBtn[i].addEventListener(wEvent, func);
+    }
 }
