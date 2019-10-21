@@ -94,8 +94,12 @@ for (let i = 0; i < coursesList.length; i++)
 }
 
 addButtonListeners("course-btn", "click", function(event) {
-    let pattern, result;
-    const innerHTML = event.target.parentElement.parentElement.innerHTML;
+    let title, author, rating;
+    const codeHTML = event.target.parentElement.parentElement.innerHTML;
+
+    title = codeHTML.match(/<span>[a-zA-Z\s,!@']+<\/span>/)[0].replace(/<\/?[a-z]+>/g, "");
+
+    console.log(codeHTML);
 });
 
 function addCourse(obj)
