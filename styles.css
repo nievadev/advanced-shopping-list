@@ -54,7 +54,6 @@ main {
 }
 
 footer {
-    background-color: crimson;
     grid-area: f;
 }
 
@@ -218,6 +217,51 @@ h1 {
     margin: 50px 0px;
 }
 
+/* Footer Layout */
+footer {
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: 
+        ". c .";
+}
+
+/* Styling Footer */
+.footer-all-container {
+    grid-area: c;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.footer-all-container .logo-img {
+    height: 70px;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.footer-link {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+.footer-link a {
+    display: block;
+    margin: 10px 20px;
+    font-size: 1.3rem;
+    color: #808080;
+    transition: color 0.3s;
+    white-space: nowrap;
+}
+
+.footer-link a:hover {
+    color: #cccccc;
+}
+
 /* Card Container Layout */
 .card-container {
     display: grid;
@@ -306,20 +350,12 @@ h1 {
 
 /* Media queries */
 @media only screen and (max-width: 1350px) {
-    .top-header {
-        grid-template-columns: 40px 1fr 40px !important;
-    }
-
-    header {
+    .top-header, footer, header, main {
         grid-template-columns: 40px 1fr 40px !important;
     }
 
     .below-header {
         grid-template-columns: 0fr 1fr 0fr !important;
-    }
-
-    main {
-        grid-template-columns: 40px 1fr 40px !important;
     }
 }
 
