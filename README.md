@@ -5,6 +5,6 @@
 This project relies on localStorage to save the courses you have supposedly bought. <br>
 
 # What did I gain?
-**1**. Much more skill at programming with JavaScript
-**2**. Understood localStorage and sessionStorage concepts
-**3**. CSS Grids and Flexboxes!
+**1**. Much more skill at programming with JavaScript<br>
+**2**. Understood localStorage and sessionStorage concepts<br>
+**3**. CSS Grids and Flexboxes!<br>
