@@ -3,7 +3,6 @@ document.querySelector("#form").addEventListener("submit", function(event) {
 })
 
 let coursesList, cartList; 
-const btnInfo = "Enroll now!";
 
 const defaultCoursesList = [
     { author: "Martin Nieva",               title: "Master JavaScript, HTML and CSS!",                   imgUrl: "./img/nieva.jpeg",    rating: 5 },
@@ -38,7 +37,7 @@ else
 
 function main()
 {
-    actualizeCourses(btnInfo);
+    actualizeDom();
 
     addButtonListeners("course-btn", "click", function(event) {
         let title, author, rating, price, image;
@@ -58,11 +57,11 @@ function main()
     });
 }
 
-function actualizeCourses(btnInfo)
+function actualizeDom()
 {
     for (let i = 0; i < coursesList.length; i++)
     {
-        let card = document.createElement("div");
+        const card = document.createElement("div");
         card.className = "card";
         card.innerHTML = `
             <div class="of">
@@ -81,7 +80,7 @@ function actualizeCourses(btnInfo)
                     <span><strong>$5</strong></span>
                 </div>
                 <div class="card-btn">
-                    <button class="course-btn">${btnInfo}</button>
+                    <button class="course-btn">Enroll now!</button>
                 </div>
             </div>
         `;
@@ -91,6 +90,26 @@ function actualizeCourses(btnInfo)
         document.querySelector("#cardImg-" + i).style.background = "#cfcfcf url(" + coursesList[i].imgUrl + ") center center no-repeat";
         document.querySelector("#cardImg-" + i).style.backgroundSize = "cover";
     }
+
+    for (let i = 0; i < cartList.length; i++)
+    {
+        const item = document.createElement("tr");
+        item.innerHTML = `
+            <td>
+                <div class="cart-item-img">
+                    <img src="${cartList[i].imgUrl}" alt="Cart image of ${cartList[i].author}">
+                </div>
+            </td>
+            <td>
+                <p class="cart-item-info">${cartList[i].title}</p>
+            </td>
+            <td>
+                <p class="cart-item-rating">$${cartList[i].rating}</p>
+            </td>
+        `;
+
+        document.querySelector("#cartTable").append(item);
+    }
 }
 
 function addToCart(_image, _title, _author, _rating)
@@ -99,16 +118,11 @@ function addToCart(_image, _title, _author, _rating)
     courseAddedToCart = {
         author: _author,
         title: _title,
-        image: _image,
+        imgUrl: _image,
         rating: _rating
     };
 
-    if (courseAddedToCart == cartList[-1])
-    {
-        return;
-    }
-
-    else if (cartList.length == coursesList.length)
+    if (objectInArray(courseAddedToCart, cartList))
     {
         return;
     }
@@ -117,8 +131,8 @@ function addToCart(_image, _title, _author, _rating)
     setCart(cartList);
 
     const cartTable = document.querySelector("#cartTable");
-    const createdElement = document.createElement("tr");
-    createdElement.innerHTML = `
+    const item = document.createElement("tr");
+    item.innerHTML = `
         <td>
             <div class="cart-item-img">
                 <img src="${_image}" alt="Cart image of ${_author}">
@@ -132,7 +146,7 @@ function addToCart(_image, _title, _author, _rating)
         </td>
     `;
 
-    cartTable.append(createdElement);
+    cartTable.append(item);
 }
 
 function addCourse(obj)
@@ -203,6 +217,19 @@ function addButtonListeners(_class, wEvent, func)
     {
         allBtn[i].addEventListener(wEvent, func);
     }
+}
+
+function objectInArray(object, array)
+{
+    for (let i = 0; i < array.length; i++)
+    {
+        if (compare(array[i], object))
+        {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 main();
