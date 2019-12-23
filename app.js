@@ -1,5 +1,4 @@
-let coursesList = [];
-const btnInfo = "Enroll now!";
+let coursesList = []; const btnInfo = "Enroll now!";
 
 document.querySelector("#form").addEventListener("submit", function(event) {
     event.preventDefault();
@@ -24,7 +23,7 @@ const defaultCoursesList = [
         author: "Mr. God",
         title: "Using magic to help people from scratch",
         imgUrl: "./img/god.jpeg",
-        rating: 5
+        rating: 5 
     },
 
     {
@@ -94,13 +93,25 @@ for (let i = 0; i < coursesList.length; i++)
 }
 
 addButtonListeners("course-btn", "click", function(event) {
-    let title, author, rating;
-    const codeHTML = event.target.parentElement.parentElement.innerHTML;
+    let title, author, rating, price, image;
+    const currentElement = event.target.parentElement.parentElement;
+    const imageElementHTML = currentElement.parentElement.getElementsByClassName("of")[0].innerHTML;
 
-    title = codeHTML.match(/<span>[a-zA-Z\s,!@']+<\/span>/)[0].replace(/<\/?[a-z]+>/g, "");
+    title = currentElement.getElementsByClassName("card-title")[0].firstElementChild.textContent;
+    author = currentElement.getElementsByClassName("card-author")[0].firstElementChild.textContent;
 
-    console.log(codeHTML);
+    ratingAndPrice = currentElement.getElementsByClassName("card-rating-price")[0];
+    rating = ratingAndPrice.firstElementChild.textContent.match(/\d+/)[0];
+    price = ratingAndPrice.lastElementChild.textContent.match(/\d+/)[0];
+
+    image = imageElementHTML.match(/(\.\/)?img\/\w+\.(jp[e]?g|png)/)[0];
+
+    addToCart(image, title, author, rating, price);
 });
+
+function addToCart(image, title, author, rating, price)
+{
+}
 
 function addCourse(obj)
 {
@@ -142,14 +153,14 @@ function getCourses()
     return JSON.parse(localStorage.getItem("courses"));
 }
 
-function compare(oldArr, newArr)
-{
-    return JSON.stringify(oldArr) == JSON.stringify(newArr) ? true : false;
-}
-
 function setCourses(arr)
 {
     localStorage.setItem("courses", JSON.stringify(arr));
+}
+
+function compare(oldArr, newArr)
+{
+    return JSON.stringify(oldArr) == JSON.stringify(newArr) ? true : false;
 }
 
 function addButtonListeners(_class, wEvent, func)
