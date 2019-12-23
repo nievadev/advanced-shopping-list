@@ -5,47 +5,12 @@ document.querySelector("#form").addEventListener("submit", function(event) {
 })
 
 const defaultCoursesList = [
-    {
-        author: "Martin Nieva",
-        title: "Master JavaScript, HTML and CSS!",
-        imgUrl: "./img/nieva.jpeg",
-        rating: 5
-    },
-
-    {
-        author: "Ignacio Dodero",
-        title: "Learn to play the guitar with Dodero's masterclass",
-        imgUrl: "./img/dodero.jpeg",
-        rating: 4
-    },
-
-    {
-        author: "Mr. God",
-        title: "Using magic to help people from scratch",
-        imgUrl: "./img/god.jpeg",
-        rating: 5 
-    },
-
-    {
-        author: "Unknown Redhead Girl",
-        title: "How to be beautiful",
-        imgUrl: "./img/redhead.jpeg",
-        rating: 5
-    },
-
-    {
-        author: "Daniel Kahneman",
-        title: "Psychology Basics",
-        imgUrl: "./img/kahneman.jpeg",
-        rating: 4
-    },
-
-    {
-        author: "Terry A. Davis and Mr. God",
-        title: "Make an OS from scratch",
-        imgUrl: "./img/terry.png",
-        rating: 5, 
-    }
+    { author: "Martin Nieva",               title: "Master JavaScript, HTML and CSS!",                   imgUrl: "./img/nieva.jpeg",    rating: 5 },
+    { author: "Ignacio Dodero",             title: "Learn to play the guitar with Dodero's masterclass", imgUrl: "./img/dodero.jpeg",   rating: 4 },
+    { author: "Mr. God",                    title: "Using magic to help people from scratch",            imgUrl: "./img/god.jpeg",      rating: 5 },
+    { author: "Unknown Redhead Girl",       title: "How to be beautiful",                                imgUrl: "./img/redhead.jpeg",  rating: 5 },
+    { author: "Daniel Kahneman",            title: "Psychology Basics",                                  imgUrl: "./img/kahneman.jpeg", rating: 4 },
+    { author: "Terry A. Davis and Mr. God", title: "Make an OS from scratch",                            imgUrl: "./img/terry.png",     rating: 5 }
 ];
 
 if (!getCourses())
