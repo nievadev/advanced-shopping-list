@@ -1,8 +1,9 @@
-let coursesList = []; const btnInfo = "Enroll now!";
-
 document.querySelector("#form").addEventListener("submit", function(event) {
     event.preventDefault();
 })
+
+let coursesList, cartList; 
+const btnInfo = "Enroll now!";
 
 const defaultCoursesList = [
     { author: "Martin Nieva",               title: "Master JavaScript, HTML and CSS!",                   imgUrl: "./img/nieva.jpeg",    rating: 5 },
@@ -16,7 +17,6 @@ const defaultCoursesList = [
 if (!getCourses())
 {
     coursesList = [...defaultCoursesList];
-
     setCourses(coursesList);
 }
 
@@ -25,57 +25,114 @@ else
     coursesList = getCourses();
 }
 
-for (let i = 0; i < coursesList.length; i++)
+if (!getCart())
 {
-    let card = document.createElement("div");
-    card.className = "card";
-    card.innerHTML = `
-        <div class="of">
-            <div id="cardImg-${i}" class="card-img">
-            </div>
-        </div>
-        <div class="card-content">
-            <div class="card-title">
-                <span>${coursesList[i].title}</span>
-            </div>
-            <div class="card-author">
-                <span>By <strong>${coursesList[i].author}</strong></span>
-            </div>
-            <div class="card-rating-price">
-                <span>Rating: ${coursesList[i].rating} stars</span>
-                <span><strong>$5</strong></span>
-            </div>
-            <div class="card-btn">
-                <button class="course-btn">${btnInfo}</button>
-            </div>
-        </div>
-    `;
-
-    document.querySelector("#cardContainer").append(card);
-
-    document.querySelector("#cardImg-" + i).style.background = "#cfcfcf url(" + coursesList[i].imgUrl + ") center center no-repeat";
-    document.querySelector("#cardImg-" + i).style.backgroundSize = "cover";
+    cartList = [];
+    setCart(cartList);
 }
 
-addButtonListeners("course-btn", "click", function(event) {
-    let title, author, rating, price, image;
-    const currentElement = event.target.parentElement.parentElement;
-    const imageElementHTML = currentElement.parentElement.getElementsByClassName("of")[0].innerHTML;
-
-    title = currentElement.getElementsByClassName("card-title")[0].firstElementChild.textContent;
-    author = currentElement.getElementsByClassName("card-author")[0].firstElementChild.textContent;
-
-    ratingAndPrice = currentElement.getElementsByClassName("card-rating-price")[0];
-    rating = ratingAndPrice.firstElementChild.textContent.match(/\d+/)[0];
-    price = ratingAndPrice.lastElementChild.textContent.match(/\d+/)[0];
-
-    image = imageElementHTML.match(/(\.\/)?img\/\w+\.(jp[e]?g|png)/)[0];
-
-    addToCart(image, title, author, rating, price);
-});
-
-function addToCart(image, title, author, rating, price)
+else
 {
+    cartList = getCart();
+}
+
+function main()
+{
+    actualizeCourses(btnInfo);
+
+    addButtonListeners("course-btn", "click", function(event) {
+        let title, author, rating, price, image;
+        const currentElement = event.target.parentElement.parentElement;
+        const imageElementHTML = currentElement.parentElement.getElementsByClassName("of")[0].innerHTML;
+
+        title = currentElement.getElementsByClassName("card-title")[0].firstElementChild.textContent;
+        author = currentElement.getElementsByClassName("card-author")[0].firstElementChild.textContent;
+
+        ratingAndPrice = currentElement.getElementsByClassName("card-rating-price")[0];
+        rating = ratingAndPrice.firstElementChild.textContent.match(/\d+/)[0];
+        // price = ratingAndPrice.lastElementChild.textContent.match(/\d+/)[0];
+
+        image = imageElementHTML.match(/(\.\/)?img\/\w+\.(jp[e]?g|png)/)[0];
+
+        addToCart(image, title, author, rating)
+    });
+}
+
+function actualizeCourses(btnInfo)
+{
+    for (let i = 0; i < coursesList.length; i++)
+    {
+        let card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+            <div class="of">
+                <div id="cardImg-${i}" class="card-img">
+                </div>
+            </div>
+            <div class="card-content">
+                <div class="card-title">
+                    <span>${coursesList[i].title}</span>
+                </div>
+                <div class="card-author">
+                    <span>By <strong>${coursesList[i].author}</strong></span>
+                </div>
+                <div class="card-rating-price">
+                    <span>Rating: ${coursesList[i].rating} stars</span>
+                    <span><strong>$5</strong></span>
+                </div>
+                <div class="card-btn">
+                    <button class="course-btn">${btnInfo}</button>
+                </div>
+            </div>
+        `;
+
+        document.querySelector("#cardContainer").append(card);
+
+        document.querySelector("#cardImg-" + i).style.background = "#cfcfcf url(" + coursesList[i].imgUrl + ") center center no-repeat";
+        document.querySelector("#cardImg-" + i).style.backgroundSize = "cover";
+    }
+}
+
+function addToCart(_image, _title, _author, _rating)
+{
+    // { author: "Martin Nieva",               title: "Master JavaScript, HTML and CSS!",                   imgUrl: "./img/nieva.jpeg",    rating: 5 },
+    courseAddedToCart = {
+        author: _author,
+        title: _title,
+        image: _image,
+        rating: _rating
+    };
+
+    if (courseAddedToCart == cartList[-1])
+    {
+        return;
+    }
+
+    else if (cartList.length == coursesList.length)
+    {
+        return;
+    }
+
+    cartList.push(courseAddedToCart);
+    setCart(cartList);
+
+    const cartTable = document.querySelector("#cartTable");
+    const createdElement = document.createElement("tr");
+    createdElement.innerHTML = `
+        <td>
+            <div class="cart-item-img">
+                <img src="${_image}" alt="Cart image of ${_author}">
+            </div>
+        </td>
+        <td>
+            <p class="cart-item-info">${_title}</p>
+        </td>
+        <td>
+            <p class="cart-item-rating">$${_rating}</p>
+        </td>
+    `;
+
+    cartTable.append(createdElement);
 }
 
 function addCourse(obj)
@@ -123,6 +180,16 @@ function setCourses(arr)
     localStorage.setItem("courses", JSON.stringify(arr));
 }
 
+function getCart()
+{
+    return JSON.parse(localStorage.getItem("cart"));
+}
+
+function setCart(arr)
+{
+    localStorage.setItem("cart", JSON.stringify(arr));
+}
+
 function compare(oldArr, newArr)
 {
     return JSON.stringify(oldArr) == JSON.stringify(newArr) ? true : false;
@@ -137,3 +204,5 @@ function addButtonListeners(_class, wEvent, func)
         allBtn[i].addEventListener(wEvent, func);
     }
 }
+
+main();

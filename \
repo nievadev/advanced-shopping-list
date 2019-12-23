@@ -347,39 +347,18 @@ footer {
 }
 
 /* Styling Cart */
-.cart-all-container {
-}
-
-.cart-table-container {
+.cart-container {
     position: relative;
 }
 
-.cart-table {
-    display: none;
+.cart {
     position: absolute;
-    top: 0;
+    top: ;
     right: 0;
-    background-color: white;
-    border: 1px solid red;
 }
 
-.cart-item-img {
-    display: flex;
-    justify-content: center;
-    background-color: #cccccc;
-}
-
-.cart-item-img img {
-    max-width: 100px;
-    max-height: 60px;
-}
-
-.cart-item-info {
-    white-space: nowrap;
-}
-
-.shopping-cart:hover + .cart-table-container .cart-table {
-    display: block !important;
+.cart-img {
+    width: 100px;
 }
 
 /* background-color: #fad390; */
