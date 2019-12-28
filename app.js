@@ -1,3 +1,14 @@
+// Use isEqual() later
+// Then add delete button to specific course in cart
+
+const TABLE = 0
+const CARD = 1
+const TABLE_ROW = 2
+const NO_ITEMS = 3
+
+const noItems = document.createElement("div");
+noItems.innerHTML = getLayout(NO_ITEMS);
+
 document.querySelector("#form").addEventListener("submit", function(event) {
     event.preventDefault();
 })
@@ -13,27 +24,7 @@ const defaultCoursesList = [
     { author: "Terry A. Davis and Mr. God", title: "Make an OS from scratch",                            imgUrl: "./img/terry.png",     rating: 5 }
 ];
 
-if (!getCourses())
-{
-    coursesList = [...defaultCoursesList];
-    setCourses(coursesList);
-}
-
-else
-{
-    coursesList = getCourses();
-}
-
-if (!getCart())
-{
-    cartList = [];
-    setCart(cartList);
-}
-
-else
-{
-    cartList = getCart();
-}
+main();
 
 function main()
 {
@@ -59,11 +50,38 @@ function main()
 
 function actualizeDom()
 {
+    if (!getCourses())
+    {
+        coursesList = [...defaultCoursesList];
+        setCourses(coursesList);
+    }
+
+    else
+    {
+        coursesList = getCourses();
+    }
+
+    if (!getCart())
+    {
+        cartList = [];
+        setCart(cartList);
+    }
+
+    else
+    {
+        cartList = getCart();
+    }
+
+    if (cartList.length == 0)
+    {
+        document.querySelector("#cartTable").append(noItems);
+    }
+
     for (let i = 0; i < coursesList.length; i++)
     {
         const card = document.createElement("div");
         card.className = "card";
-        card.innerHTML = getLayout("card", coursesList[i].imgUrl, coursesList[i].author, coursesList[i].title, coursesList[i].rating, i);
+        card.innerHTML = getLayout(CARD, coursesList[i].imgUrl, coursesList[i].author, coursesList[i].title, coursesList[i].rating, i);
 
         document.querySelector("#cardContainer").append(card);
 
@@ -74,7 +92,7 @@ function actualizeDom()
     for (let i = 0; i < cartList.length; i++)
     {
         const item = document.createElement("tr");
-        item.innerHTML = getLayout("table", cartList[i].imgUrl, cartList[i].author, cartList[i].title, cartList[i].rating);
+        item.innerHTML = getLayout(TABLE, cartList[i].imgUrl, cartList[i].author, cartList[i].title, cartList[i].rating);
 
         document.querySelector("#cartTable").append(item);
     }
@@ -97,16 +115,20 @@ function addToCart(_image, _title, _author, _rating)
 
     if (cartList.length == 0)
     {
+        const cartTable = document.querySelector("#cartTable");
+        cartTable.innerHTML = "";
+
         const firstTableRow = document.createElement("tr");
-        firstTableRow.innerHTML = getLayout("table row");
-        document.querySelector("#cartTable").append(firstTableRow);
+        firstTableRow.innerHTML = getLayout(TABLE_ROW);
+
+        cartTable.append(firstTableRow);
 
         document.querySelector("#deleteButton").addEventListener("click", event => {
             cartList = [];
             setCart(cartList);
 
-            let cartTable = document.querySelector("#cartTable");
             cartTable.innerHTML = "";
+            cartTable.append(noItems);
         });
     }
 
@@ -115,7 +137,7 @@ function addToCart(_image, _title, _author, _rating)
 
     const cartTable = document.querySelector("#cartTable");
     const item = document.createElement("tr");
-    item.innerHTML = getLayout("table", _image, _author, _title, _rating);
+    item.innerHTML = getLayout(TABLE, _image, _author, _title, _rating);
 
     cartTable.append(item);
 }
@@ -185,7 +207,7 @@ function objectInArray(object, array)
 
 function getLayout(layout, img = "", author = "", title = "", rating = "", i = 0)
 {
-    if (layout == "table")
+    if (layout == TABLE)
     {
         return `
             <td>
@@ -205,7 +227,7 @@ function getLayout(layout, img = "", author = "", title = "", rating = "", i = 0
         `;
     }
 
-    else if (layout == "card")
+    else if (layout == CARD)
     {
         return `
             <div class="of">
@@ -230,7 +252,7 @@ function getLayout(layout, img = "", author = "", title = "", rating = "", i = 0
         `;
     }
 
-    else if (layout == "table row")
+    else if (layout == TABLE_ROW)
     {
         return `
             <td>
@@ -250,7 +272,12 @@ function getLayout(layout, img = "", author = "", title = "", rating = "", i = 0
         `;
     }
 
+    else if (layout == NO_ITEMS)
+    {
+        return `
+            <p>No items in cart</p>
+        `;
+    }
+
     return;
 }
-
-main();
