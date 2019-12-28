@@ -39,7 +39,7 @@ function main()
 {
     actualizeDom();
 
-    addButtonListeners("course-btn", "click", function(event) {
+    addButtonListeners("course-btn", "click", event => {
         let title, author, rating, price, image;
         const currentElement = event.target.parentElement.parentElement;
         const imageElementHTML = currentElement.parentElement.getElementsByClassName("of")[0].innerHTML;
@@ -63,27 +63,7 @@ function actualizeDom()
     {
         const card = document.createElement("div");
         card.className = "card";
-        card.innerHTML = `
-            <div class="of">
-                <div id="cardImg-${i}" class="card-img">
-                </div>
-            </div>
-            <div class="card-content">
-                <div class="card-title">
-                    <span>${coursesList[i].title}</span>
-                </div>
-                <div class="card-author">
-                    <span>By <strong>${coursesList[i].author}</strong></span>
-                </div>
-                <div class="card-rating-price">
-                    <span>Rating: ${coursesList[i].rating} stars</span>
-                    <span><strong>$5</strong></span>
-                </div>
-                <div class="card-btn">
-                    <button class="course-btn">Enroll now!</button>
-                </div>
-            </div>
-        `;
+        card.innerHTML = getLayout("card", coursesList[i].imgUrl, coursesList[i].author, coursesList[i].title, coursesList[i].rating, i);
 
         document.querySelector("#cardContainer").append(card);
 
@@ -94,19 +74,7 @@ function actualizeDom()
     for (let i = 0; i < cartList.length; i++)
     {
         const item = document.createElement("tr");
-        item.innerHTML = `
-            <td>
-                <div class="cart-item-img">
-                    <img src="${cartList[i].imgUrl}" alt="Cart image of ${cartList[i].author}">
-                </div>
-            </td>
-            <td>
-                <p class="cart-item-info">${cartList[i].title}</p>
-            </td>
-            <td>
-                <p class="cart-item-rating">$${cartList[i].rating}</p>
-            </td>
-        `;
+        item.innerHTML = getLayout("table", cartList[i].imgUrl, cartList[i].author, cartList[i].title, cartList[i].rating);
 
         document.querySelector("#cartTable").append(item);
     }
@@ -127,62 +95,45 @@ function addToCart(_image, _title, _author, _rating)
         return;
     }
 
+    if (cartList.length == 0)
+    {
+        const firstTableRow = document.createElement("tr");
+        firstTableRow.innerHTML = getLayout("table row");
+        document.querySelector("#cartTable").append(firstTableRow);
+
+        document.querySelector("#deleteButton").addEventListener("click", event => {
+            cartList = [];
+            setCart(cartList);
+
+            let cartTable = document.querySelector("#cartTable");
+            cartTable.innerHTML = "";
+        });
+    }
+
     cartList.push(courseAddedToCart);
     setCart(cartList);
 
     const cartTable = document.querySelector("#cartTable");
     const item = document.createElement("tr");
-    item.innerHTML = `
-        <td>
-            <div class="cart-item-img">
-                <img src="${_image}" alt="Cart image of ${_author}">
-            </div>
-        </td>
-        <td>
-            <p class="cart-item-info">${_title}</p>
-        </td>
-        <td>
-            <p class="cart-item-rating">$${_rating}</p>
-        </td>
-    `;
+    item.innerHTML = getLayout("table", _image, _author, _title, _rating);
 
     cartTable.append(item);
 }
 
-function addCourse(obj)
-{
-    coursesList.push(obj);
-    setCourses(coursesList);
-
-    let card = document.createElement("div");
-    card.className = "card";
-    card.innerHTML = `
-        <div class="of">
-            <div id="cardImg-${coursesList.length - 1}" class="card-img">
-            </div>
-        </div>
-        <div class="card-content">
-            <div class="card-title">
-                <span>${obj.title}</span>
-            </div>
-            <div class="card-author">
-                <span>By <strong>${obj.author}</strong></span>
-            </div>
-            <div class="card-rating-price">
-                <span>Rating: ${obj.rating} stars</span>
-                <span><strong>$5</strong></span>
-            </div>
-            <div class="card-btn">
-                <button class="course-btn">${btnInfo}</button>
-            </div>
-        </div>
-    `;
-
-    document.querySelector("#cardContainer").append(card);
-
-    document.querySelector("#cardImg-" + (coursesList.length - 1)).style.background = "#cfcfcf url(" + obj.imgUrl + ") center center no-repeat";
-    document.querySelector("#cardImg-" + (coursesList.length - 1)).style.backgroundSize = "cover";
-}
+// function addCourse(obj)
+// {
+//     coursesList.push(obj);
+//     setCourses(coursesList);
+// 
+//     let card = document.createElement("div");
+//     card.className = "card";
+//     card.innerHTML = getLayout(coursesList[i].imgUrl, coursesList[i].author, coursesList[i].title, coursesList[i].rating, "card", i);
+// 
+//     document.querySelector("#cardContainer").append(card);
+// 
+//     document.querySelector("#cardImg-" + (coursesList.length - 1)).style.background = "#cfcfcf url(" + obj.imgUrl + ") center center no-repeat";
+//     document.querySelector("#cardImg-" + (coursesList.length - 1)).style.backgroundSize = "cover";
+// }
 
 function getCourses()
 {
@@ -230,6 +181,76 @@ function objectInArray(object, array)
     }
 
     return false;
+}
+
+function getLayout(layout, img = "", author = "", title = "", rating = "", i = 0)
+{
+    if (layout == "table")
+    {
+        return `
+            <td>
+                <p>Test</p>
+            </td>
+            <td>
+                <div class="cart-item-img">
+                    <img src="${img}" alt="Cart image of ${author}">
+                </div>
+            </td>
+            <td>
+                <p>${title}</p>
+            </td>
+            <td>
+                <p>${rating}</p>
+            </td>
+        `;
+    }
+
+    else if (layout == "card")
+    {
+        return `
+            <div class="of">
+                <div id="cardImg-${i}" class="card-img">
+                </div>
+            </div>
+            <div class="card-content">
+                <div class="card-title">
+                    <span>${title}</span>
+                </div>
+                <div class="card-author">
+                    <span>By <strong>${author}</strong></span>
+                </div>
+                <div class="card-rating-price">
+                    <span>Rating: ${rating} stars</span>
+                    <span><strong>$5</strong></span>
+                </div>
+                <div class="card-btn">
+                    <button class="course-btn">"Enroll now!"</button>
+                </div>
+            </div>
+        `;
+    }
+
+    else if (layout == "table row")
+    {
+        return `
+            <td>
+                <button id="deleteButton" class="delete-icon" type="button">
+                    <img src="./img/svg/delete.svg" alt="">
+                </button>
+            </td>
+            <td>
+                <p>Icon</p>
+            </td>
+            <td>
+                <p>Title</p>
+            </td>
+            <td>
+                <p>Rating</p>
+            </td>
+        `;
+    }
+
+    return;
 }
 
 main();
