@@ -9,6 +9,9 @@ const NO_ITEMS = 3
 const noItems = document.createElement("div");
 noItems.innerHTML = getLayout(NO_ITEMS);
 
+const firstTableRow = document.createElement("tr");
+firstTableRow.innerHTML = getLayout(TABLE_ROW);
+
 document.querySelector("#form").addEventListener("submit", function(event) {
     event.preventDefault();
 })
@@ -77,6 +80,11 @@ function actualizeDom()
         document.querySelector("#cartTable").append(noItems);
     }
 
+    else
+    {
+        document.querySelector("#cartTable").append(firstTableRow);
+    }
+
     for (let i = 0; i < coursesList.length; i++)
     {
         const card = document.createElement("div");
@@ -118,9 +126,6 @@ function addToCart(_image, _title, _author, _rating)
         const cartTable = document.querySelector("#cartTable");
         cartTable.innerHTML = "";
 
-        const firstTableRow = document.createElement("tr");
-        firstTableRow.innerHTML = getLayout(TABLE_ROW);
-
         cartTable.append(firstTableRow);
 
         document.querySelector("#deleteButton").addEventListener("click", event => {
@@ -141,21 +146,6 @@ function addToCart(_image, _title, _author, _rating)
 
     cartTable.append(item);
 }
-
-// function addCourse(obj)
-// {
-//     coursesList.push(obj);
-//     setCourses(coursesList);
-// 
-//     let card = document.createElement("div");
-//     card.className = "card";
-//     card.innerHTML = getLayout(coursesList[i].imgUrl, coursesList[i].author, coursesList[i].title, coursesList[i].rating, "card", i);
-// 
-//     document.querySelector("#cardContainer").append(card);
-// 
-//     document.querySelector("#cardImg-" + (coursesList.length - 1)).style.background = "#cfcfcf url(" + obj.imgUrl + ") center center no-repeat";
-//     document.querySelector("#cardImg-" + (coursesList.length - 1)).style.backgroundSize = "cover";
-// }
 
 function getCourses()
 {
