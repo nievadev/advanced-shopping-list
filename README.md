@@ -8,4 +8,4 @@ It's yet on development, not finished.
 # What did I gain?
 **1**. Much more skill at programming with JavaScript<br>
 **2**. Understood localStorage and sessionStorage concepts<br>
-**3**. CSS Grids and Flexboxes!<br>
+**3**. More experience in using CSS Grids and Flexboxes!<br>
