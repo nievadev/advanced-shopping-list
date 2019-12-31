@@ -1,4 +1,12 @@
 /* Default */
+.enableBlur>* {
+    filter: blur(10px);
+}
+
+.disableBlur {
+    filter: blur(0);
+}
+
 html {
     font-family: "Raleway", sans-serif;
     font-size: 16px;
@@ -360,8 +368,7 @@ table {
     top: 0;
     right: 0;
     background-color: white;
-    border: 2px solid black;
-    border-radius: 15px;
+    padding: 10px 20px 10px 0px;
 }
 
 table:hover {
@@ -371,7 +378,6 @@ table:hover {
 tr td .cart-item-img {
     display: flex;
     justify-content: center;
-    background-color: #cccccc;
 }
 
 tr td .cart-item-img img {
@@ -379,10 +385,20 @@ tr td .cart-item-img img {
     max-height: 60px;
 }
 
-tr td p {
-    white-space: nowrap;
+tr td span, tr td p {
+    display: block;
     text-align: center;
     font-size: 1.3rem;
+}
+
+.item-title {
+    min-width: 400px;
+    margin: 0px 13px;
+}
+
+.item-rating {
+    color: #d2aa0c;
+    font-weight: 400;
 }
 
 .shopping-cart:hover + .cart-table-container .cart-table {
@@ -437,5 +453,9 @@ tr td p {
     h1 {
         font-size: 3em;
         margin: 20px 0px !important;
+    }
+
+    .item-title {
+        min-width: 160px;
     }
 }

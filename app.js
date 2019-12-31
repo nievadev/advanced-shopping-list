@@ -83,6 +83,14 @@ function actualizeDom()
     else
     {
         document.querySelector("#cartTable").append(firstTableRow);
+
+        document.querySelector("#deleteButton").addEventListener("click", event => {
+            cartList = [];
+            setCart(cartList);
+
+            cartTable.innerHTML = "";
+            cartTable.append(noItems);
+        });
     }
 
     for (let i = 0; i < coursesList.length; i++)
@@ -101,6 +109,8 @@ function actualizeDom()
     {
         const item = document.createElement("tr");
         item.innerHTML = getLayout(TABLE, cartList[i].imgUrl, cartList[i].author, cartList[i].title, cartList[i].rating);
+
+        // let itemIcon = item.children[1].firstElementChild;
 
         document.querySelector("#cartTable").append(item);
     }
@@ -141,8 +151,11 @@ function addToCart(_image, _title, _author, _rating)
     setCart(cartList);
 
     const cartTable = document.querySelector("#cartTable");
+
     const item = document.createElement("tr");
     item.innerHTML = getLayout(TABLE, _image, _author, _title, _rating);
+
+    // let itemIcon = item.children[1].firstElementChild;
 
     cartTable.append(item);
 }
@@ -201,7 +214,7 @@ function getLayout(layout, img = "", author = "", title = "", rating = "", i = 0
     {
         return `
             <td>
-                <p>Test</p>
+                <p></p>
             </td>
             <td>
                 <div class="cart-item-img">
@@ -209,10 +222,10 @@ function getLayout(layout, img = "", author = "", title = "", rating = "", i = 0
                 </div>
             </td>
             <td>
-                <p>${title}</p>
+                <p class="item-title">${title}</p>
             </td>
             <td>
-                <p>${rating}</p>
+                <p class="item-rating">${rating}&bigstar;</p>
             </td>
         `;
     }
@@ -251,13 +264,13 @@ function getLayout(layout, img = "", author = "", title = "", rating = "", i = 0
                 </button>
             </td>
             <td>
-                <p>Icon</p>
+                <span><strong>Icon</strong></span>
             </td>
             <td>
-                <p>Title</p>
+                <span><strong>Title</strong></span>
             </td>
             <td>
-                <p>Rating</p>
+                <span><strong>Rating</strong></span>
             </td>
         `;
     }
