@@ -3,7 +3,6 @@
 ### Done with native JS, HTML and CSS
 
 This project relies on localStorage to save the courses you have supposedly bought. <br>
-It's yet on development, not finished.
 
 # What did I gain?
 **1**. Much more skill at programming with JavaScript<br>
